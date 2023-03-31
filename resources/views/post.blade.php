@@ -2,9 +2,9 @@
 
 @section('container')
 <h1>Halaman {{ $title }}</h1>
-<article>
+<article class="mt-5 border-bottom">
     <h3>{{ $post->title }}</h3>
-    <h5>By. Taufik Hidayat in <a href="/categories/{{ $post->categories->slug }}"> {{ $post->categories->name }}</a></h5>
+    <p>By. Taufik Hidayat in <a href="/categories/{{ $post->categories->slug }}"> {{ $post->categories->name }}</a></p>
     {!! $post->body !!}
     <a href="/posts">Back Post</a>
 </article>

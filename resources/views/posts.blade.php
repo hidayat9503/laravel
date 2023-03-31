@@ -5,9 +5,10 @@
 <br>
 @foreach ($posts as $post)
 <article class="mb-5">
-    <h3><a href="/posts/{{ $post->slug }}">{{ $post->title }}</a></h3>
-    <h5>By. {{ $post->author }}</h5>
+    <h3>{{ $post->title }}</h3>
+    <p>By. Taufik Hidayat in <a class="text-decoration-none" href="/categories/{{ $post->categories->slug }}"> {{ $post->categories->name }}</a></p>
     <p>{{ $post->excerpt }}</p> 
+    <p><a href="/posts/{{ $post->slug }}">Read more..</a></p>
 </article>
 @endforeach
 
