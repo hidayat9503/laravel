@@ -28,8 +28,12 @@ return [
     |
     */
 
-    'alias' => [
+    'Categories' => [
         App\Models\Categories::class
+    ],
+
+    'Post' => [
+        App\Models\Post::class
     ],
 
     /*
