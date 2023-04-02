@@ -9,6 +9,9 @@
       @if (request('categories'))
           <input type="hidden" name="categories" value="{{ request('categories') }}">
       @endif
+      @if (request('author'))
+          <input type="hidden" name="author" value="{{ request('author') }}">
+      @endif
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Search.." name="search" value="{{ request('search') }}">
         <button class="btn btn-danger" type="submit">Search</button>
@@ -24,7 +27,7 @@
         <h3 class="card-title"> <a class="text-decoration-none text-dark" href="/posts/{{ $posts[0]->slug }}">{{ $posts[0]->title }}</a></h3>
         <p>
             <small>
-                By. <a class="text-decoration-none" href="/author/{{ $posts[0]->author->username }}">{{ $posts[0]->author->name }}</a> in <a class="text-decoration-none" href="/posts?categories={{ $posts[0]->categories->slug }}"> {{ $posts[0]->categories->name }}</a> {{ $posts[0]->created_at->diffForHumans() }}
+                By. <a class="text-decoration-none" href="/posts?author={{ $posts[0]->author->username }}">{{ $posts[0]->author->name }}</a> in <a class="text-decoration-none" href="/posts?categories={{ $posts[0]->categories->slug }}"> {{ $posts[0]->categories->name }}</a> {{ $posts[0]->created_at->diffForHumans() }}
             </small>
         </p>
       <p class="card-text">{{ $posts[0]->excerpt }}</p>
@@ -41,7 +44,7 @@
                     <img src="https://source.unsplash.com/random/500×400?{{ $post->categories->name }}" class="card-img-top" alt="{{ $post->categories->name }}" height="200">
                     <div class="card-body">
                       <h5 class="card-title">{{ $post->title }}</h5>
-                      <p class="text-muted"><small><a class="text-decoration-none" href="/author/{{ $post->author->username }}"> {{ $post->author->name }}</a> {{ $posts[0]->created_at->diffForHumans() }}</small></p>
+                      <p class="text-muted"><small>By. <a class="text-decoration-none" href="/posts?author={{ $post->author->username }}"> {{ $post->author->name }}</a> {{ $posts[0]->created_at->diffForHumans() }}</small></p>
                       <p class="card-text">{{ $post->excerpt }}</p>
                       <a href="/posts/{{ $post->slug }}" class="text-decoration-none">Read more</a>
                     </div>
@@ -54,4 +57,6 @@
 @else
   <p class="text-center fs-4">No Posts Found</p>
 @endif
+
+{{ $posts->links() }}
 @endsection
