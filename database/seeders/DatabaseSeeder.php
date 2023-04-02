@@ -39,13 +39,17 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Categories::create([
-            'name' => 'Personal',
-            'slug' => 'personal'
+            'name' => 'Web Developer',
+            'slug' => 'web-developer'
         ]);
 
         Categories::create([
             'name' => 'Data Analysis',
             'slug' => 'data-analysis'
+        ]);
+        Categories::create([
+            'name' => 'Computer Sience',
+            'slug' => 'computer-sience'
         ]);
 
         Post::factory(20)->create();
