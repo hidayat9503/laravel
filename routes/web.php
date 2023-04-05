@@ -1,10 +1,11 @@
 <?php
 
-use App\Models\Post;
+use App\Http\Controllers\DashboardController;
+use App\Models\Categories;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
-use App\Models\Categories;
-use App\Models\User;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +46,14 @@ Route::get('/categories', function () {
     ]);
 });
 
+Route::get('/login', [LoginController::class, 'index'])->name('login')->middleware('guest');
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/register', [RegisterController::class, 'index'])->middleware('guest');
+Route::post('/register', [RegisterController::class, 'store']);
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 // Route::get('/categories/{categories:slug}', function (Categories $categories) {
 //     return view('posts', [
 //         'title' => "Post by Categories: $categories->name",
