@@ -41,7 +41,7 @@
         
         <div class="mb-3">
           <label for="image" class="form-label">Upload Image</label>
-          <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" value="{{ old('image') }}" accept="image/*" required autofocus>
+          <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" accept="image/*" required autofocus>
           @error('image')
               <div class="invalid-feedback">
                 {{ $message }}
