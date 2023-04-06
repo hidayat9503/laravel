@@ -6,7 +6,7 @@
 </div>
 
 <div class="col-lg-8">
-    <form action="/dashboard/posts" method="post">
+    <form action="/dashboard/posts" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
@@ -22,10 +22,10 @@
             <input type="text" class="form-control @error('slug') is-invalid @enderror" name="slug" id="slug" value="{{ old('slug') }}" readonly required>
             @error('slug')
                 <div class="invalid-feedback">
-                  {{ $message }}
+                    {{ $message }}
                 </div>
-            @enderror
-        </div>
+                @enderror
+            </div>
         <div class="mb-3">
             <label for="categories" class="form-label">Categories</label>
             <select class="form-select" name="categories_id">
@@ -38,6 +38,17 @@
                 @endforeach
             </select>
         </div>
+        
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload Image</label>
+          <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" value="{{ old('image') }}" accept="image/*" required autofocus>
+          @error('image')
+              <div class="invalid-feedback">
+                {{ $message }}
+              </div>
+          @enderror
+        </div>
+
         <div class="mb-3">
             <label for="body" class="form-label">Body</label>
             @error('body')
