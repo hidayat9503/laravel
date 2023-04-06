@@ -3,13 +3,15 @@
 namespace App\Models;
 
 // use App\Models\Categories;
+use App\Models\Categories;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 // use Illuminate\Database\Eloquent\MassAssignmentException;
 
 class Post extends Model
 {
-    use HasFactory;
+    use HasFactory, Sluggable;
     // protected $fillable = ['title', 'excerpt', 'body'];
     protected $guarded = ['id'];
     protected $with = ['categories', 'author'];
@@ -46,5 +48,21 @@ class Post extends Model
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    use Sluggable;
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
