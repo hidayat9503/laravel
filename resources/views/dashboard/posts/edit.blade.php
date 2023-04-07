@@ -6,7 +6,7 @@
 </div>
 
 <div class="col-lg-8">
-    <form action="/dashboard/posts/{{ $post->slug }}" method="post">
+    <form action="/dashboard/posts/{{ $post->slug }}" method="post" class="mb-5" enctype="multipart/form-data">
         @method('put')
         @csrf
         <div class="mb-3">
@@ -40,6 +40,21 @@
             </select>
         </div>
         <div class="mb-3">
+            <label for="image" class="form-label">Upload Image</label>
+            <input type="hidden" name="oldImage" value="{{ $post->image }}">
+            @if ($post->image)
+            <img src="{{ asset('storage/'. $post->image) }}" class="img-preview img-fluit mb-3 col-sm-5 d-block">
+            @else
+            <img class="img-preview img-fluit mb-3 col-sm-5">
+            @endif
+            <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" accept="image/*" onchange="previewImage()" required autofocus>
+            @error('image')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="body" class="form-label">Body</label>
             @error('body')
             <p class="text-danger">{{ $message }}</p>
@@ -50,21 +65,6 @@
         <button type="submit" class="btn btn-primary mb-5">Update Post</button>
     </form>
 </div>
-
-<script>
-    const title = document.querySelector("#title");
-    const slug = document.querySelector("#slug");
-
-    title.addEventListener("keyup", function() {
-        let preslug = title.value;
-        preslug = preslug.replace(/ /g,"-");
-        slug.value = preslug.toLowerCase();
-    });
-
-    document.addEventListener('trix-file-accept', function (e) {
-        e.preventDefault();
-    })
-</script>
 
 @endsection
 

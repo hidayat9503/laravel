@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminCategoriesController;
 use App\Http\Controllers\DashboardPostController;
 use App\Models\Categories;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,9 @@ Route::get('/dashboard', function () {
 })->middleware('auth');
 
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+Route::resource('/dashboard/categories', AdminCategoriesController::class)->except('show')->middleware('admin');
+
 // Route::get('/categories/{categories:slug}', function (Categories $categories) {
 //     return view('posts', [
 //         'title' => "Post by Categories: $categories->name",

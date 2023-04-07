@@ -45,6 +45,35 @@
   </div>
 </div>
 
+    <script>
+      const title = document.querySelector("#title");
+      const slug = document.querySelector("#slug");
+
+      title.addEventListener("keyup", function() {
+          let preslug = title.value;
+          preslug = preslug.replace(/ /g,"-");
+          slug.value = preslug.toLowerCase();
+      });
+
+      document.addEventListener('trix-file-accept', function (e) {
+          e.preventDefault();
+      });
+
+      function previewImage(){
+          const image = document.querySelector('#image');
+          const imgPreview = document.querySelector('.img-preview');
+
+          imgPreview.style.display = 'block';
+
+          const oFReader = new FileReader();
+          oFReader.readAsDataURL(image.files[0]);
+
+          oFReader.onload = function (oFREvent) {
+              imgPreview.src = oFREvent.target.result;
+          }
+
+      }
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 

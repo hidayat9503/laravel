@@ -41,7 +41,8 @@
         
         <div class="mb-3">
           <label for="image" class="form-label">Upload Image</label>
-          <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" accept="image/*" required autofocus>
+          <img class="img-preview img-fluit mb-3 col-sm-5">
+          <input type="file" class="form-control @error('image') is-invalid @enderror" name="image" id="image" accept="image/*" onchange="previewImage()" required autofocus>
           @error('image')
               <div class="invalid-feedback">
                 {{ $message }}
@@ -60,21 +61,6 @@
         <button type="submit" class="btn btn-primary mb-5">Create Post</button>
     </form>
 </div>
-
-<script>
-    const title = document.querySelector("#title");
-    const slug = document.querySelector("#slug");
-
-    title.addEventListener("keyup", function() {
-        let preslug = title.value;
-        preslug = preslug.replace(/ /g,"-");
-        slug.value = preslug.toLowerCase();
-    });
-
-    document.addEventListener('trix-file-accept', function (e) {
-        e.preventDefault();
-    })
-</script>
 
 @endsection
 
